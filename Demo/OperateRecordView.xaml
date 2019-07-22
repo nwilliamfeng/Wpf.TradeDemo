@@ -7,6 +7,37 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        <Style TargetType="TextBox" >
+            <Setter Property="CaretBrush" Value="White"/>
+            <Setter Property="Template">
+               
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Name="border"
+                            BorderBrush="#2D3834"
+                                Background="Transparent"
+                            Padding="2"                         
+                            BorderThickness="1">
+                            <Grid>
+                                <TextBlock x:Name="waterMark" Text="单号" VerticalAlignment="Center" Foreground="Gray" Visibility="Collapsed"/>
+                                <ScrollViewer Margin="0" x:Name="PART_ContentHost"  Background="Transparent"  VerticalContentAlignment="Center" />
+                            </Grid>
+                          
+                           
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Text" Value=""/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Visibility" TargetName="waterMark" Value="Visible"/>
+                            </MultiTrigger>
+                            
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style TargetType="ListBoxItem" x:Key="listBoxItemStyle">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Margin" Value="0"/>
@@ -55,7 +86,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="操作记录" Foreground="White" VerticalAlignment="Center"/>
-                    <TextBox Grid.Column="1" Margin="10,0" MinWidth="100"/>
+                    <TextBox Grid.Column="1" Margin="10,0" MinWidth="100" Foreground="White"/>
                     <DockPanel Grid.Column="3">
                         <DockPanel.Resources>
                             <Style TargetType="Button" BasedOn="{StaticResource buttonStyle}">
@@ -81,7 +112,7 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Border VerticalAlignment="Stretch" Width="10" MinHeight="60">
-                                    <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=(ListBox.AlternationIndex)}" />
+                                   
                                         <Border.Style>
                                             <Style TargetType="Border">
                                                 <Style.Triggers>

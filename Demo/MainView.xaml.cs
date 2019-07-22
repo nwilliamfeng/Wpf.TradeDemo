@@ -20,10 +20,30 @@ namespace Demo
     /// </summary>
     public partial class MainView : Window
     {
+        private double width;
         public MainView()
         {
             InitializeComponent();
             this.DataContext = new MainViewModel();
+            this.opRecordView.SizeChanged += (s, e) => width = this.opRecordView.ActualWidth;
+        }
+
+        private void CollapseButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.opRecordView.Visibility == Visibility.Collapsed)
+            {
+                (sender as Button).Content = ">";
+                this.opRecordView.Visibility = Visibility.Visible;
+                this.cd2.Width =width>0? new GridLength(width ): new GridLength(0.35, GridUnitType.Star);
+                this.cd2.MinWidth = 100;
+            }
+            else
+            {
+                (sender as Button).Content = "<";
+                this.opRecordView.Visibility = Visibility.Collapsed;
+                this.cd2.Width = GridLength.Auto;
+                this.cd2.MinWidth = 0;
+            }
         }
     }
 }
