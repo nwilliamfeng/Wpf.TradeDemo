@@ -54,6 +54,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="OperateRecordView.xaml.cs">
+      <DependentUpon>OperateRecordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OperatorRecordViewModel.cs" />
     <Compile Include="Trader.cs" />
     <Page Include="MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -68,6 +72,10 @@
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OperateRecordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -94,6 +102,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\clock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\forbid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ok.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

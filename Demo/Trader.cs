@@ -26,6 +26,10 @@ namespace Demo
     {
         public decimal DealPrice { get; set; }
 
+        public string FractionOfDealPrice => this.DealPrice.ToString().Split('.').LastOrDefault();
+
+        public string IntegralOfDealPrice => this.DealPrice.ToString().Split('.').FirstOrDefault();
+
         public bool IsGvn => Deals.Count > 0 ? Deals.FirstOrDefault().IsGVNDeal : false;
 
         public ObservableCollection<Deal> Deals { get; set; } = new ObservableCollection<Deal>();

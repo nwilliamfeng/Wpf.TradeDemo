@@ -4,6 +4,106 @@
              xmlns:local="clr-namespace:Demo"
              StartupUri="MainView.xaml">
     <Application.Resources>
-         
+        <SolidColorBrush x:Key="tknBrush" Color="#078DE0"/>
+        <SolidColorBrush x:Key="gvnBrush" Color="#D95F02"/>
+        <Style TargetType="TextBlock" x:Key="codeTextBlockStyle">
+            <Setter Property="Foreground" Value="#DFB353"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style TargetType="Button" x:Key="buttonStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="3" 
+                                x:Name="border"
+                                Width="{TemplateBinding Width}"
+                                BorderThickness="1"
+                                Height="{TemplateBinding Height}"                           
+                               TextElement.FontSize="{TemplateBinding FontSize}"
+                                TextElement.Foreground="{TemplateBinding Foreground}"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter Margin="{TemplateBinding Padding}"
+                                Content="{TemplateBinding Content}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                    <Condition Property="IsPressed" Value="False"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Opacity" Value="0.8" TargetName="border"/>
+
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                    <Condition Property="IsPressed" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Opacity" Value="0.9" TargetName="border"/>
+                                <Setter Property="BorderBrush" Value="White" TargetName="border"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button" x:Key="chromeButtonStyle">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border 
+                                x:Name="border"
+                                Width="{TemplateBinding Width}"
+                                BorderThickness="1"
+                                Height="{TemplateBinding Height}"                           
+                               TextElement.FontSize="{TemplateBinding FontSize}"
+                                TextElement.Foreground="{TemplateBinding Foreground}"
+                                Background="Transparent">
+                            <ContentPresenter Margin="{TemplateBinding Padding}"
+                                Content="{TemplateBinding Content}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                    <Condition Property="IsPressed" Value="False"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Opacity" Value="0.8" TargetName="border"/>
+
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                    <Condition Property="IsPressed" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Opacity" Value="0.9" TargetName="border"/>
+                                <Setter Property="BorderBrush" Value="White" TargetName="border"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="textBlockStyle">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style TargetType="ItemsControl">
+
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="2" Background="#182422" />
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>

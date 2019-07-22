@@ -6,66 +6,7 @@
         xmlns:local="clr-namespace:Demo"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" WindowState="Maximized">
-    <Window.Resources>
-        <Style TargetType="TextBlock" x:Key="codeTextBlockStyle">
-            <Setter Property="Foreground" Value="#DFB353"/>
-            <Setter Property="FontSize" Value="20"/>
-        </Style>
-        <Style TargetType="Button" x:Key="buttonStyle">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="3" 
-                                x:Name="border"
-                                Width="{TemplateBinding Width}"
-                                BorderThickness="1"
-                                Height="{TemplateBinding Height}"                           
-                               TextElement.FontSize="{TemplateBinding FontSize}"
-                                TextElement.Foreground="{TemplateBinding Foreground}"
-                                Background="{TemplateBinding Background}">
-                            <ContentPresenter Margin="{TemplateBinding Padding}"
-                                Content="{TemplateBinding Content}"
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="IsMouseOver" Value="True"/>
-                                    <Condition Property="IsPressed" Value="False"/>
-                                </MultiTrigger.Conditions>
-                                <Setter Property="Opacity" Value="0.8" TargetName="border"/>
-
-                            </MultiTrigger>
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="IsMouseOver" Value="True"/>
-                                    <Condition Property="IsPressed" Value="True"/>
-                                </MultiTrigger.Conditions>
-                                <Setter Property="Opacity" Value="0.9" TargetName="border"/>
-                                <Setter Property="BorderBrush" Value="White" TargetName="border"/>
-                            </MultiTrigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style TargetType="TextBlock" x:Key="textBlockStyle">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="14"/>
-        </Style>
-        <Style TargetType="ItemsControl">
-
-            <Setter Property="ItemsPanel">
-                <Setter.Value>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="2" Background="#182422" />
-                    </ItemsPanelTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
+    
     <Grid Background="#0A0E0D">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -84,143 +25,170 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button Content="交易处理" Padding="40,6" Margin="10" Style="{StaticResource buttonStyle}" Background="Orange" FontSize="16"/>
-            <Button Content="历史记录" Grid.Column="1" Padding="10,3" VerticalAlignment="Center"/>
+            <Button Content="历史记录" Grid.Column="1" Margin="10,0,0,0" Padding="10,3" VerticalAlignment="Center" Style="{StaticResource chromeButtonStyle}" FontSize="16"/>
 
         </Grid>
         <!--MainRegion-->
-        <ItemsControl ItemsSource="{Binding Trades}" Grid.Row="1">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border CornerRadius="2" 
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="0.3*"/>
+            </Grid.ColumnDefinitions>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding Trades}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border CornerRadius="2" 
                             BorderBrush="#38403E" 
                             BorderThickness="1" 
                             HorizontalAlignment="Stretch" 
                             VerticalAlignment="Stretch" 
                             Padding="5" 
                             Margin="1">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock  VerticalAlignment="Center">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock  VerticalAlignment="Center">
                                     <TextBlock Text="{Binding Code}" Style="{StaticResource codeTextBlockStyle}" />
                                     <TextBlock Margin="5,-2,0,0" 
                                                Text="{Binding Name}" 
                                                Style="{StaticResource textBlockStyle}" 
                                                />
                                 </TextBlock>
-                                <!--gvn,tkn,refer region-->
-                                <Grid Grid.Column="2" HorizontalAlignment="Right">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.Resources>
-                                        <Style TargetType="Button" BasedOn="{StaticResource buttonStyle}">
-                                            <Setter Property="Width" Value="90"/>
-                                            <Setter Property="Foreground" Value="White"/>
-                                            <Setter Property="Padding" Value="10,6"/>
-                                            <Setter Property="FontSize" Value="18"/>
-                                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                                            <Setter Property="Margin" Value="0,0,15,0"/>
-                                        </Style>
-                                    </Grid.Resources>
-                                    <Button Content="GVN" Background="#D95F02"  />
-                                    <Button Content="TKN" Background="#078DE0" Grid.Column="1" />
-                                    <Button Content="Refer" Background="#887B74"  Grid.Column="2" />
-                                </Grid>
-                                <Button Content="远" Grid.Column="3"/>
+                                        <!--gvn,tkn,refer region-->
+                                        <Grid Grid.Column="2" HorizontalAlignment="Right">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.Resources>
+                                                <Style TargetType="Button" BasedOn="{StaticResource buttonStyle}">
+                                                    <Setter Property="Width" Value="70"/>
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                    <Setter Property="Padding" Value="6,4"/>
+                                                    <Setter Property="FontSize" Value="14"/>
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                    <Setter Property="Margin" Value="0,0,5,0"/>
+                                                </Style>
+                                            </Grid.Resources>
+                                            <Button Content="GVN" Background="#D95F02"  />
+                                            <Button Content="TKN" Background="#078DE0" Grid.Column="1" />
+                                            <Button Content="Refer" Background="#887B74"  Grid.Column="2" />
+                                        </Grid>
+                                        <Button Content="远" Grid.Column="3"/>
 
-                            </Grid>
-                            <UniformGrid Grid.Row="1" Margin="0,10,0,0" Columns="2">
-                                <UniformGrid.Resources>
-                                   
-
-                                    <!--TradeItem DataTemplate-->
-                                    <DataTemplate DataType="{x:Type local:TradeItem}">
-                                        <DataTemplate.Resources>
-                                            <ItemsPanelTemplate x:Key="dealPanel">
-                                                <UniformGrid Rows="2"  Background="#313127" Margin="1"/>
-                                            </ItemsPanelTemplate>
-                                            <ItemsPanelTemplate x:Key="dealPanel2">
-                                                <UniformGrid Rows="2"  Background="#1B2D31" Margin="1"/>
-                                            </ItemsPanelTemplate>
-                                        </DataTemplate.Resources>
-                                        <DockPanel>
-                                            <TextBlock Text="{Binding DealPrice}" x:Name="priceTB"   
+                                    </Grid>
+                                    <UniformGrid Grid.Row="1" Margin="0,10,0,0" Columns="2">
+                                        <UniformGrid.Resources>
+                                            <!--TradeItem DataTemplate-->
+                                            <DataTemplate DataType="{x:Type local:TradeItem}">
+                                                <DataTemplate.Resources>
+                                                    <ItemsPanelTemplate x:Key="dealPanel">
+                                                        <UniformGrid Rows="2"  Background="#313127" Margin="1"/>
+                                                    </ItemsPanelTemplate>
+                                                    <ItemsPanelTemplate x:Key="dealPanel2">
+                                                        <UniformGrid Rows="2"  Background="#1B2D31" Margin="1"/>
+                                                    </ItemsPanelTemplate>
+                                                </DataTemplate.Resources>
+                                                <DockPanel>
+                                                    <TextBlock Text="{Binding DealPrice}" x:Name="priceTB"   
                                                        FontWeight="Bold" 
                                                        FontSize="18"
                                                        DockPanel.Dock="Top" 
                                                        Margin="5" >
-                                                <TextBlock.Style>
-                                                    <Style TargetType="TextBlock" BasedOn="{StaticResource textBlockStyle}">
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding IsGvn}" Value="True">
-                                                                <Setter Property="Foreground" Value="#E59354"/>
-                                                            </DataTrigger>
-                                                            <DataTrigger Binding="{Binding IsGvn}" Value="False">
-                                                                <Setter Property="Foreground" Value="#3975C4"/>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </TextBlock.Style>
-                                            </TextBlock>
-                                            <ItemsControl ItemsSource="{Binding Deals}"   x:Name="dealItemsControl">
-                                                <ItemsControl.ItemTemplate>
-                                                    <DataTemplate DataType="{x:Type local:Deal}">
-                                                        <Border BorderThickness="2" Margin="0,1,0,1"  Padding="2" x:Name="border">
-                                                            <TextBlock Style="{StaticResource textBlockStyle}" Foreground="White" Margin="3" FontSize="16">
-                                                                <Run Text="{Binding DealCount}" FontWeight="Bold" FontSize="18"/>
-                                                                <LineBreak/>
-                                                                <TextBlock Text="{Binding Name}" MaxWidth="90" Margin="0,5" TextTrimming="WordEllipsis" Opacity="0.6"/>
-                                                                <LineBreak/>
-                                                                <TextBlock Text="{Binding OperatorA}" Opacity="0.6" />
-                                                                 <LineBreak/>
-                                                                <TextBlock Text="{Binding OperatorB}" Opacity="0.6"  Margin="0,5"/>
-                                                            </TextBlock>
+                                                        <TextBlock.Style>
+                                                            <Style TargetType="TextBlock" BasedOn="{StaticResource textBlockStyle}">
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding IsGvn}" Value="True">
+                                                                        <Setter Property="Foreground" Value="#E59354"/>
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding IsGvn}" Value="False">
+                                                                        <Setter Property="Foreground" Value="#3975C4"/>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </TextBlock.Style>
+                                                    </TextBlock>
+                                                    <ItemsControl ItemsSource="{Binding Deals}"   x:Name="dealItemsControl">
+                                                        <ItemsControl.ItemTemplate>
+                                                            <DataTemplate DataType="{x:Type local:Deal}">
+                                                                <Border BorderThickness="2" Margin="0,1,0,1"  Padding="2" x:Name="border">
+                                                                    <TextBlock Style="{StaticResource textBlockStyle}" Foreground="White" Margin="3" FontSize="12">
+                                                                        <Run Text="{Binding DealCount}" FontWeight="Bold" FontSize="18"/>
+                                                                        <LineBreak/>
+                                                                        <TextBlock Text="{Binding Name}" MaxWidth="90" Margin="0,5" TextTrimming="WordEllipsis" Opacity="0.7"/>
+                                                                        <LineBreak/>
+                                                                        <TextBlock Text="{Binding OperatorA}" Opacity="0.7" />
+                                                                        <LineBreak/>
+                                                                
+                                                                        <Border   CornerRadius="6" Margin="0,6">
+                                                                            <Border.Style>
+                                                                                 <Style TargetType="Border">
+                                                                                    <Style.Triggers>
+                                                                                        <DataTrigger Binding="{Binding IsOperatorActive}" Value="true">
+                                                                                            <Setter Property="Background" Value="Green"/> 
+                                                                                            <Setter Property="Padding" Value="15,0"/>
+                                                                                        </DataTrigger>
+                                                                                        <DataTrigger Binding="{Binding IsOperatorActive}" Value="false">
+                                                                                            <Setter Property="Background" Value="Transparent"/> 
+                                                                                            <Setter Property="Padding" Value="0"/>
+                                                                                        </DataTrigger>
+                                                                                    </Style.Triggers>
+                                                                                </Style>
+                                                                            </Border.Style>
+                                                                            <TextBlock Text="{Binding OperatorB}"  Opacity="0.7" />                                                                       
+                                                                        </Border>                                                                                                                          
+                                                                    </TextBlock>
+                                                                </Border>
+                                                                <DataTemplate.Triggers>
+                                                                    <DataTrigger Binding="{Binding IsGVNDeal}" Value="True">
+                                                                        <Setter Property="Background" TargetName="border" Value="#473622" />
+                                                                        <Setter Property="BorderBrush" TargetName="border" Value="#5A5444" />
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding IsGVNDeal}" Value="False">
+                                                                        <Setter Property="Background" TargetName="border" Value="#153752" />
+                                                                        <Setter Property="BorderBrush" TargetName="border" Value="#19435C" />
+                                                                    </DataTrigger>
+                                                                </DataTemplate.Triggers>
+                                                            </DataTemplate>
+                                                        </ItemsControl.ItemTemplate>
+                                                    </ItemsControl>
+                                                </DockPanel>
+                                                <DataTemplate.Triggers>
+                                                    <DataTrigger Binding="{Binding IsGvn}" Value="True">
+                                                        <Setter Property="ItemsPanel" TargetName="dealItemsControl" Value="{StaticResource dealPanel}"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding IsGvn}" Value="False">
+                                                        <Setter Property="ItemsPanel" TargetName="dealItemsControl" Value="{StaticResource dealPanel2}"/>
+                                                    </DataTrigger>
+                                                </DataTemplate.Triggers>
+                                            </DataTemplate>
+                                        </UniformGrid.Resources>
+                                        <ItemsControl ItemsSource="{Binding Gvns}" />
+                                        <ItemsControl ItemsSource="{Binding Tkns}" />
+                                    </UniformGrid>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+            <Button Content=">" Grid.Column="1" VerticalAlignment="Center"/>
+            <local:OperateRecordView Grid.Column="2"/>
+        </Grid>
 
-                                                        </Border>
-                                                        <DataTemplate.Triggers>
-                                                            <DataTrigger Binding="{Binding IsGVNDeal}" Value="True">
-                                                                <Setter Property="Background" TargetName="border" Value="#473622" />
-                                                                <Setter Property="BorderBrush" TargetName="border" Value="#5A5444" />
-                                                            </DataTrigger>
-                                                            <DataTrigger Binding="{Binding IsGVNDeal}" Value="False">
-                                                                <Setter Property="Background" TargetName="border" Value="#153752" />
-                                                                <Setter Property="BorderBrush" TargetName="border" Value="#19435C" />
-                                                            </DataTrigger>
-                                                        </DataTemplate.Triggers>
-                                                    </DataTemplate>
-                                                </ItemsControl.ItemTemplate>
-                                            </ItemsControl>
-                                        </DockPanel>
-                                        <DataTemplate.Triggers>
-                                            <DataTrigger Binding="{Binding IsGvn}" Value="True">
-                                                <Setter Property="ItemsPanel" TargetName="dealItemsControl" Value="{StaticResource dealPanel}"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding IsGvn}" Value="False">
-                                                <Setter Property="ItemsPanel" TargetName="dealItemsControl" Value="{StaticResource dealPanel2}"/>
-                                            </DataTrigger>
-                                        </DataTemplate.Triggers>
-                                    </DataTemplate>
-                                </UniformGrid.Resources>
-                                <ItemsControl ItemsSource="{Binding Gvns}" />
-                                <ItemsControl ItemsSource="{Binding Tkns}" />
-                            </UniformGrid>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+
         <!--Footer-->
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>

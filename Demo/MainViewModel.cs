@@ -72,6 +72,13 @@ namespace Demo
             yield return new Deal { DealPrice = 3.54m, Name = "齐鲁银行", OperatorA = "周飞", OperatorB = "张弛", DealCount = 2000, IsGVNDeal = true };
             yield return new Deal { DealPrice = 3.535m, Name = "AAA", OperatorA = "陈天宇", OperatorB = "孙佳宝", DealCount = 5000 };
             yield return new Deal { DealPrice = 3.53m, Name = "FFF", OperatorA = "张腾", OperatorB = "孙晓宇", DealCount = 2000 };
+
+            yield return new Deal { DealPrice = 3.685m, Name = "南宫农商行", OperatorA = "安兆航", OperatorB = "王苑", DealCount = 3000, IsGVNDeal = true };
+            yield return new Deal { DealPrice = 3.68m, Name = "汇添富基金", OperatorA = "廖文熙", OperatorB = "张凯悦", DealCount = 3000, IsGVNDeal = true };
+            yield return new Deal { DealPrice = 3.6775m, Name = "南方基金-嘉实", OperatorA = "刘诗梦", OperatorB = "李鼎超", DealCount = 4000 };
+            yield return new Deal { DealPrice = 3.6775m, Name = "凤县农商行", OperatorA = "周林", OperatorB = "万依林", DealCount = 4000 };
+            yield return new Deal { DealPrice = 3.675m, Name = "国信证券国兰", OperatorA = "郑好", OperatorB = "兰凯", DealCount = 2000 };
+            yield return new Deal { DealPrice = 3.675m, Name = "AAA", OperatorA = "周佳", OperatorB = "张弛", DealCount = 2000 };
         }
     }
 }
